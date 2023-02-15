@@ -60,7 +60,7 @@ void SimpleLUFSMeterAudioProcessor::processBlock(juce::AudioBuffer<float>& buffe
 
 juce::AudioProcessorEditor* SimpleLUFSMeterAudioProcessor::createEditor()
 {
-    return new juce::GenericAudioProcessorEditor(*this);
+    return new SimpleLUFSMeterAudioProcessorEditor(*this);
 }
 
 bool SimpleLUFSMeterAudioProcessor::hasEditor() const
