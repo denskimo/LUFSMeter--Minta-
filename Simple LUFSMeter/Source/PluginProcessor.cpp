@@ -17,6 +17,14 @@ void SimpleLUFSMeterAudioProcessor::releaseResources()
 {
 }
 
+void SimpleLUFSMeterAudioProcessor::getCurrentProgramStateInformation(juce::MemoryBlock& destData)
+{
+}
+
+void SimpleLUFSMeterAudioProcessor::setCurrentProgramStateInformation(const void* data, int sizeInBytes)
+{
+}
+
 void SimpleLUFSMeterAudioProcessor::processBlock(juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
 {
     // Set up the loudness meter using the EBU R128 standard
