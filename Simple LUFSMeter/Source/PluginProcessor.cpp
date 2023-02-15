@@ -1,11 +1,19 @@
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
-#include <JuceHeader.h>
 #include "ebur128.h"
 
 SimpleLUFSMeterAudioProcessor::SimpleLUFSMeterAudioProcessor()
     : AudioProcessor(BusesProperties().withInput("Input", juce::AudioChannelSet::stereo(), true))
 {
+}
+
+SimpleLUFSMeterAudioProcessor::~SimpleLUFSMeterAudioProcessor()
+{
+}
+
+void SimpleLUFSMeterAudioProcessor::setCurrentProgram(int index)
+{
+    // You can leave this function empty if you don't need to do anything here.
 }
 
 void SimpleLUFSMeterAudioProcessor::prepareToPlay(double sampleRate, int samplesPerBlock)
@@ -14,14 +22,6 @@ void SimpleLUFSMeterAudioProcessor::prepareToPlay(double sampleRate, int samples
 }
 
 void SimpleLUFSMeterAudioProcessor::releaseResources()
-{
-}
-
-void SimpleLUFSMeterAudioProcessor::getCurrentProgramStateInformation(juce::MemoryBlock& destData)
-{
-}
-
-void SimpleLUFSMeterAudioProcessor::setCurrentProgramStateInformation(const void* data, int sizeInBytes)
 {
 }
 
@@ -81,33 +81,8 @@ const juce::String SimpleLUFSMeterAudioProcessor::getName() const
     return JucePlugin_Name;
 }
 
-bool SimpleLUFSMeterAudioProcessor::isBusesLayoutSupported(const BusesLayout& layouts) const
-{
-    return true;
-}
-
-const juce::String SimpleLUFSMeterAudioProcessor::getProgramName(int index)
-{
-    return {};
-}
-
-void SimpleLUFSMeterAudioProcessor::changeProgramName(int index, const juce::String& newName)
-{
-}
-
-int SimpleLUFSMeterAudioProcessor::getCurrentProgram()
-{
-    return 0;
-}
-
-void SimpleLUFSMeterAudioProcessor::setCurrentProgram(int index)
-{
-    // You can leave this function empty if you don't need to do anything here.
-}
-
 // This creates new instances of the plugin
 juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter()
 {
     return new SimpleLUFSMeterAudioProcessor();
 }
-
