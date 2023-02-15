@@ -1,9 +1,9 @@
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
-#include "ebur128.h"
 
 SimpleLUFSMeterAudioProcessor::SimpleLUFSMeterAudioProcessor()
-    : AudioProcessor(BusesProperties().withInput("Input", juce::AudioChannelSet::stereo(), true))
+    : AudioProcessor(BusesProperties().withInput("Input", juce::AudioChannelSet::stereo(), true)),
+      sampleRate_(44100.0), samplesPerBlock_(64)
 {
 }
 
@@ -13,16 +13,48 @@ SimpleLUFSMeterAudioProcessor::~SimpleLUFSMeterAudioProcessor()
 
 void SimpleLUFSMeterAudioProcessor::setCurrentProgram(int index)
 {
-    // You can leave this function empty if you don't need to do anything here.
 }
 
-void SimpleLUFSMeterAudioProcessor::prepareToPlay(double sampleRate, int samplesPerBlock)
+int SimpleLUFSMeterAudioProcessor::getCurrentProgram()
 {
-    sampleRate_ = sampleRate;
+    return 0;
 }
 
-void SimpleLUFSMeterAudioProcessor::releaseResources()
+const juce::String SimpleLUFSMeterAudioProcessor::getProgramName(int index)
 {
+    return {};
+}
+
+void SimpleLUFSMeterAudioProcessor::changeProgramName(int index, const juce::String& newName)
+{
+}
+
+void SimpleLUFSMeterAudioProcessor::getStateInformation(juce::MemoryBlock& destData)
+{
+}
+
+void SimpleLUFSMeterAudioProcessor::setStateInformation(const void* data, int sizeInBytes)
+{
+}
+
+double SimpleLUFSMeterAudioProcessor::getTailLengthSeconds() const
+{
+    return 0.0;
+}
+
+bool SimpleLUFSMeterAudioProcessor::acceptsMidi() const
+{
+    return false;
+}
+
+bool SimpleLUFSMeterAudioProcessor::producesMidi() const
+{
+    return false;
+}
+
+bool SimpleLUFSMeterAudioProcessor::isMidiEffect() const
+{
+    return false;
 }
 
 void SimpleLUFSMeterAudioProcessor::processBlock(juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
@@ -69,6 +101,32 @@ void SimpleLUFSMeterAudioProcessor::processBlock(juce::AudioBuffer<float>& buffe
 juce::AudioProcessorEditor* SimpleLUFSMeterAudioProcessor::createEditor()
 {
     return new SimpleLUFSMeterAudioProcessorEditor(*this);
+}
+
+void SimpleLUFSMeterAudioProcessor::setPlayConfigDetails (int numInputChannels, int numOutputChannels, double sampleRate, int bufferSize)
+{
+    AudioProcessor::setPlayConfigDetails(numInputChannels, numOutputChannels, sampleRate, bufferSize);
+}
+
+void SimpleLUFSMeterAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
+{
+    // Add your implementation here
+}
+
+void SimpleLUFSMeterAudioProcessor::releaseResources()
+{
+    // Add your implementation here
+}
+
+bool SimpleLUFSMeterAudioProcessor::isBusesLayoutSupported(const BusesLayout& layouts) const
+{
+    // Add your implementation here
+    return true;
+}
+
+int SimpleLUFSMeterAudioProcessor::getNumPrograms()
+{
+    return 1;
 }
 
 bool SimpleLUFSMeterAudioProcessor::hasEditor() const
