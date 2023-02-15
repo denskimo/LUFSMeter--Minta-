@@ -92,6 +92,11 @@ int SimpleLUFSMeterAudioProcessor::getCurrentProgram()
     return 0;
 }
 
+void SimpleLUFSMeterAudioProcessor::setCurrentProgram(int index)
+{
+    // You can leave this function empty if you don't need to do anything here.
+}
+
 // This creates new instances of the plugin
 juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter()
 {
