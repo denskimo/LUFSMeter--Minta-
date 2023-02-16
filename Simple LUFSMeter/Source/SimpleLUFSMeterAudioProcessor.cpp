@@ -42,10 +42,12 @@ double SimpleLUFSMeterAudioProcessor::getTailLengthSeconds() const
     return 0.0;
 }
 
+/*
 double SimpleLUFSMeterAudioProcessor::getIntegratedLoudness() const
 {
     return integratedLoudness_;
 }
+*/
 
 bool SimpleLUFSMeterAudioProcessor::acceptsMidi() const
 {
@@ -87,7 +89,8 @@ void SimpleLUFSMeterAudioProcessor::processBlock(juce::AudioBuffer<float>& buffe
     }
 
     // Calculate the integrated loudness
-    integratedLoudness /= numWindows;
+    // Update the integrated loudness
+    integratedLoudness_ = integratedLoudness / numWindows;
     double integratedLoudnessDb;
     ebur128_loudness_global(loudnessState, &integratedLoudnessDb);
     double lufsMultiple = integratedLoudnessDb + 0.691;
