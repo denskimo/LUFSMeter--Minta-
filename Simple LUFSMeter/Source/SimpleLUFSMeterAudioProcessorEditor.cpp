@@ -1,21 +1,26 @@
-/*
-  ==============================================================================
-
-    This file contains the basic framework code for a JUCE plugin editor.
-
-  ==============================================================================
-*/
-
 #include "SimpleLUFSMeterAudioProcessor.h"
 #include "SimpleLUFSMeterAudioProcessorEditor.h"
 
 //==============================================================================
-SimpleLUFSMeterAudioProcessorEditor::SimpleLUFSMeterAudioProcessorEditor (SimpleLUFSMeterAudioProcessor& p)
-    : AudioProcessorEditor (&p), audioProcessor (p)
+SimpleLUFSMeterAudioProcessorEditor::SimpleLUFSMeterAudioProcessorEditor (SimpleLUFSMeterAudioProcessor& processor)
+    : juce::AudioProcessorEditor (processor),
+      audioProcessor_(processor)
 {
-    // Make sure that before the constructor has finished, you've set the
-    // editor's size to whatever you need it to be.
-    setSize (400, 300);
+    setSize (200, 200);
+
+    // Create the loudness label
+    addAndMakeVisible (loudnessLabel_);
+    loudnessLabel_.setFont (15.0f);
+    loudnessLabel_.setJustificationType (juce::Justification::centred);
+    loudnessLabel_.setText (juce::String(), juce::dontSendNotification);
+
+    startTimerHz (50);
+}
+
+void SimpleLUFSMeterAudioProcessorEditor::timerCallback()
+{
+    loudnessLabel_.setText (juce::String (audioProcessor_.getIntegratedLoudness()) + " LUFS",
+                            juce::dontSendNotification);
 }
 
 SimpleLUFSMeterAudioProcessorEditor::~SimpleLUFSMeterAudioProcessorEditor()

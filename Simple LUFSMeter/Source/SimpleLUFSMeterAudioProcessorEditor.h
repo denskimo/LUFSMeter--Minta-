@@ -14,7 +14,9 @@
 //==============================================================================
 /**
 */
-class SimpleLUFSMeterAudioProcessorEditor  : public juce::AudioProcessorEditor
+class SimpleLUFSMeterAudioProcessorEditor  : public juce::AudioProcessorEditor,
+                                             private juce::Timer
+
 {
 public:
     SimpleLUFSMeterAudioProcessorEditor (SimpleLUFSMeterAudioProcessor&);
@@ -27,7 +29,11 @@ public:
 private:
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.
-    SimpleLUFSMeterAudioProcessor& audioProcessor;
+    SimpleLUFSMeterAudioProcessor& audioProcessor_;
+
+    juce::Label loudnessLabel_;
+
+    void timerCallback() override;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SimpleLUFSMeterAudioProcessorEditor)
 };
