@@ -1,5 +1,5 @@
-#include "PluginProcessor.h"
-#include "PluginEditor.h"
+#include "SimpleLUFSMeterAudioProcessor.h"
+#include "SimpleLUFSMeterAudioProcessorEditor.h"
 
 SimpleLUFSMeterAudioProcessor::SimpleLUFSMeterAudioProcessor()
     : AudioProcessor(BusesProperties().withInput("Input", juce::AudioChannelSet::stereo(), true)),

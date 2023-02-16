@@ -6,8 +6,8 @@
   ==============================================================================
 */
 
-#include "PluginProcessor.h"
-#include "PluginEditor.h"
+#include "SimpleLUFSMeterAudioProcessor.h"
+#include "SimpleLUFSMeterAudioProcessorEditor.h"
 
 //==============================================================================
 SimpleLUFSMeterAudioProcessorEditor::SimpleLUFSMeterAudioProcessorEditor (SimpleLUFSMeterAudioProcessor& p)
