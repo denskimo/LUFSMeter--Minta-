@@ -1,19 +1,21 @@
 #include "PluginEditor.h"
 
-SimpleLUFSMeterAudioProcessorEditor::SimpleLUFSMeterAudioProcessorEditor (SimpleLUFSMeterAudioProcessor& p)
-    : AudioProcessorEditor (&p), audioProcessor (p)
+SimpleLUFSMeterAudioProcessorEditor::SimpleLUFSMeterAudioProcessorEditor(SimpleLUFSMeterAudioProcessor& processor)
+    : AudioProcessorEditor(processor), processor_(processor)
 {
-    // Add LUFS label to the editor
-    lufsLabel.setText("0.00 LUFS", juce::NotificationType::dontSendNotification);
-    lufsLabel.setFont(18.0f);
-    lufsLabel.setJustificationType(juce::Justification::centred);
-    addAndMakeVisible(lufsLabel);
-
-    setSize (300, 100);
+    setSize(200, 200);
+    addAndMakeVisible(loudnessLabel_);
+    loudnessLabel_.setText(juce::String(processor_.getIntegratedLoudness()) + " LUFS", juce::dontSendNotification);
+    startTimerHz(50);
 }
 
 SimpleLUFSMeterAudioProcessorEditor::~SimpleLUFSMeterAudioProcessorEditor()
 {
+}
+
+void SimpleLUFSMeterAudioProcessorEditor::timerCallback()
+{
+    loudnessLabel_.setText(juce::String(processor_.getIntegratedLoudness()) + " LUFS", juce::dontSendNotification);
 }
 
 void SimpleLUFSMeterAudioProcessorEditor::paint (juce::Graphics& g)

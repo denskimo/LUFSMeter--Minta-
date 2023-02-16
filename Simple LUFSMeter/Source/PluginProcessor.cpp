@@ -3,7 +3,7 @@
 
 SimpleLUFSMeterAudioProcessor::SimpleLUFSMeterAudioProcessor()
     : AudioProcessor(BusesProperties().withInput("Input", juce::AudioChannelSet::stereo(), true)),
-      sampleRate_(44100.0), samplesPerBlock_(64)
+      integratedLoudness_(-100.0)
 {
 }
 
@@ -82,7 +82,7 @@ void SimpleLUFSMeterAudioProcessor::processBlock(juce::AudioBuffer<float>& buffe
     }
 
     // Calculate the integrated loudness
-    integratedLoudness /= numWindows;
+    integratedLoudness_ = integratedLoudness / numWindows;
     double integratedLoudnessDb;
     ebur128_loudness_global(loudnessState, &integratedLoudnessDb);
     double lufsMultiple = integratedLoudnessDb + 0.691;
