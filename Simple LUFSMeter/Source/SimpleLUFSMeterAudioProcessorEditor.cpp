@@ -19,7 +19,7 @@ SimpleLUFSMeterAudioProcessorEditor::SimpleLUFSMeterAudioProcessorEditor (Simple
 void SimpleLUFSMeterAudioProcessorEditor::timerCallback()
 {
     const double integratedLoudness = audioProcessor_.getIntegratedLoudness();
-    loudnessLabel_.setText(juce::String(integratedLoudness, 2) + " LUFS", juce::dontSendNotification);
+    loudnessLabel_.setText(juce::String(audioProcessor_.getIntegratedLoudness()) + " LUFS", juce::dontSendNotification);
 }
 
 SimpleLUFSMeterAudioProcessorEditor::~SimpleLUFSMeterAudioProcessorEditor()

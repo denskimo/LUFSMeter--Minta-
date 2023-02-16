@@ -95,6 +95,8 @@ void SimpleLUFSMeterAudioProcessor::processBlock(juce::AudioBuffer<float>& buffe
     ebur128_loudness_global(loudnessState, &integratedLoudnessDb);
     double lufsMultiple = integratedLoudnessDb + 0.691;
 
+    DBG("integratedLoudness_ = " << integratedLoudness_ << ", integratedLoudnessDb = " << integratedLoudnessDb << ", lufsMultiple = " << lufsMultiple);
+
     // If the short-term loudness has dropped below a threshold, output a warning to the console
     const double shortTermLoudnessThreshold = -10.0; // Loudness warning threshold (in LUFS)
     if (shortTermLoudness_ != shortTermLoudness && shortTermLoudness < shortTermLoudnessThreshold) {
