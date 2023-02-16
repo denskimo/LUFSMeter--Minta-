@@ -35,6 +35,7 @@ public:
 
     void getStateInformation (juce::MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
+    double getIntegratedLoudness() const;
 
 private:
     double sampleRate_;
