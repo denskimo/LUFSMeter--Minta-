@@ -18,7 +18,8 @@ SimpleLUFSMeterAudioProcessorEditor::SimpleLUFSMeterAudioProcessorEditor (Simple
 
 void SimpleLUFSMeterAudioProcessorEditor::timerCallback()
 {
-    loudnessLabel_.setText (juce::String (audioProcessor_.getIntegratedLoudness()) + " LUFS",
+    double integratedLoudnessDb = audioProcessor_.getIntegratedLoudness();
+    loudnessLabel_.setText (juce::String (integratedLoudnessDb) + " LUFS",
                             juce::dontSendNotification);
 }
 
@@ -33,7 +34,7 @@ void SimpleLUFSMeterAudioProcessorEditor::paint (juce::Graphics& g)
 
     g.setColour (juce::Colours::white);
     g.setFont (15.0f);
-    g.drawText ("LUFS: " + juce::String(audioProcessor_.getIntegratedLoudness(), 2) + " dB", getLocalBounds(), juce::Justification::centred, true);
+    g.drawFittedText (loudnessLabel_.getText(), getLocalBounds(), juce::Justification::centred, 1);
 }
 
 void SimpleLUFSMeterAudioProcessorEditor::resized()
