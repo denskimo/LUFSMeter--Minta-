@@ -42,6 +42,11 @@ double SimpleLUFSMeterAudioProcessor::getTailLengthSeconds() const
     return 0.0;
 }
 
+double SimpleLUFSMeterAudioProcessor::getIntegratedLoudness() const
+{
+    return integratedLoudness_;
+}
+
 bool SimpleLUFSMeterAudioProcessor::acceptsMidi() const
 {
     return false;

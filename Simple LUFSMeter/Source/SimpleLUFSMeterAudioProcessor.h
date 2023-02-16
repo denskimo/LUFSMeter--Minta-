@@ -40,7 +40,7 @@ public:
 private:
     double sampleRate_;
     int samplesPerBlock_;
-    double integratedLoudness_ = -INFINITY;
+    double integratedLoudness_ = -std::numeric_limits<double>::infinity(); // initialize to -inf
     double shortTermLoudness_ = -INFINITY;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SimpleLUFSMeterAudioProcessor)
