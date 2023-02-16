@@ -129,6 +129,12 @@ int SimpleLUFSMeterAudioProcessor::getNumPrograms()
     return 1;
 }
 
+double SimpleLUFSMeterAudioProcessor::getIntegratedLoudness() const
+{
+    return integratedLoudness_;
+}
+
+
 bool SimpleLUFSMeterAudioProcessor::hasEditor() const
 {
     return true;

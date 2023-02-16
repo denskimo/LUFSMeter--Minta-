@@ -1,40 +1,34 @@
-/*
-  ==============================================================================
-
-    This file contains the basic framework code for a JUCE plugin editor.
-
-  ==============================================================================
-*/
-
-#include "PluginProcessor.h"
 #include "PluginEditor.h"
 
-//==============================================================================
 SimpleLUFSMeterAudioProcessorEditor::SimpleLUFSMeterAudioProcessorEditor (SimpleLUFSMeterAudioProcessor& p)
     : AudioProcessorEditor (&p), audioProcessor (p)
 {
-    // Make sure that before the constructor has finished, you've set the
-    // editor's size to whatever you need it to be.
-    setSize (400, 300);
+    // Add LUFS label to the editor
+    lufsLabel.setText("0.00 LUFS", juce::NotificationType::dontSendNotification);
+    lufsLabel.setFont(18.0f);
+    lufsLabel.setJustificationType(juce::Justification::centred);
+    addAndMakeVisible(lufsLabel);
+
+    setSize (300, 100);
 }
 
 SimpleLUFSMeterAudioProcessorEditor::~SimpleLUFSMeterAudioProcessorEditor()
 {
 }
 
-//==============================================================================
 void SimpleLUFSMeterAudioProcessorEditor::paint (juce::Graphics& g)
 {
-    // (Our component is opaque, so we must completely fill the background with a solid colour)
-    g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
+    g.fillAll (juce::Colours::black);
 
-    g.setColour (juce::Colours::white);
-    g.setFont (15.0f);
-    g.drawFittedText ("Hello World!", getLocalBounds(), juce::Justification::centred, 1);
+    // Set the text of the LUFS label to the current integrated loudness
+    double lufs = audioProcessor.getIntegratedLoudness();
+    lufsLabel.setText(juce::String(lufs, 2) + " LUFS", juce::NotificationType::dontSendNotification);
 }
+
 
 void SimpleLUFSMeterAudioProcessorEditor::resized()
 {
-    // This is generally where you'll want to lay out the positions of any
-    // subcomponents in your editor..
+    // Position the LUFS label in the center of the editor
+    juce::Rectangle<int> area = getLocalBounds();
+    lufsLabel.setBounds(area);
 }
